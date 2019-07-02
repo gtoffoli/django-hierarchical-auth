@@ -1,5 +1,5 @@
 from django.db import models
-from settings import ASCENDING_STRATEGY
+from .settings import ASCENDING_STRATEGY
 
 from django.contrib.auth.models import Group
 
@@ -21,12 +21,14 @@ models.ForeignKey(
     blank           = True,
     related_name    = 'children',
     verbose_name    = _('parent'),
-    help_text       = _('The group\'s parent group. None, if it is a root node.')
+    help_text       = _('The group\'s parent group. None, if it is a root node.'),
+    on_delete=models.CASCADE,
 ).contribute_to_class(Group, 'parent')
 
 MPTTModelBase.register(Group, order_insertion_by=['name'])
 
 # enhance User class by adding a new method that returns all groups
+
 
 def get_all_groups(self, only_ids=False, ascending_strategy=ASCENDING_STRATEGY):
     """
@@ -53,6 +55,7 @@ def get_all_groups(self, only_ids=False, ascending_strategy=ASCENDING_STRATEGY):
             else:
                 groups.add(descendant)
     return groups
+
 
 User.add_to_class('get_all_groups', get_all_groups)
 

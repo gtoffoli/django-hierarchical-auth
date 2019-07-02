@@ -11,7 +11,6 @@ class UserTestCase(TestCase):
     def setUp(self):
         create_test_objects()
 
-
     def test_get_all_groups(self):
         """
         Test if get_all_groups() returns the user's group and all parent groups.
@@ -30,7 +29,6 @@ class UserTestCase(TestCase):
         # test get_all_groups with only_ids=True
         self.assertEqual(set([2, 3, 4]), user_1.get_all_groups(only_ids=True))
 
-
         # user_2 should be member of 1 group.
         user_2 = User.objects.get(username='user_2')
         group_names = map(lambda g: g.name, user_2.get_all_groups())
@@ -40,7 +38,6 @@ class UserTestCase(TestCase):
         self.assertFalse('group_2' in group_names)
         self.assertFalse('group_3' in group_names)
         self.assertTrue('group_4' in group_names)
-
 
     def test_has_perm(self):
         """
@@ -59,7 +56,6 @@ class UserTestCase(TestCase):
         self.assertFalse(user_2.has_perm('app_1.perm_2'))
         self.assertFalse(user_2.has_perm('app_1.perm_3'))
         self.assertTrue(user_2.has_perm('app_1.perm_4'))
-
 
 
 def create_test_objects():

@@ -8,12 +8,14 @@ parent = os.path.dirname(os.path.dirname(os.path.dirname(
 
 sys.path.insert(0, parent)
 
-from django.test.simple import run_tests
+from django.test.runner import DiscoverRunner
 from django.conf import settings
 
+# Possibly broken
 def runtests():
-    failures = run_tests(['tests'], verbosity=1, interactive=True)
+    failures = DiscoverRunner.run_tests(['tests'], verbosity=1, interactive=True)
     sys.exit(failures)
+
 
 if __name__ == '__main__':
     runtests()

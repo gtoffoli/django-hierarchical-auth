@@ -1,6 +1,7 @@
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import Permission
 
+
 class HierarchicalModelBackend(ModelBackend):
     """
     Subclass of ModelBackend that checks the hierarchy of groups, that is the
