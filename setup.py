@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-hierarchical-auth',
-    version='0.3',
+    version='0.4',
     author='Stefano Crosta (scrosta)',
     original_author='Ivan Raskovsky (rasca)',
     author_email='stefano@digitalemagine.com',

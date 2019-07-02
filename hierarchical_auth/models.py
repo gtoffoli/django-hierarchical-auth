@@ -1,4 +1,5 @@
 from django.db import models
+from settings import ASCENDING_STRATEGY
 
 from django.contrib.auth.models import Group
 
@@ -27,7 +28,7 @@ MPTTModelBase.register(Group, order_insertion_by=['name'])
 
 # enhance User class by adding a new method that returns all groups
 
-def get_all_groups(self, only_ids=False):
+def get_all_groups(self, only_ids=False, ascending_strategy=ASCENDING_STRATEGY):
     """
     Returns all groups the user is member of AND all descendants groups of those
     groups.
@@ -35,14 +36,15 @@ def get_all_groups(self, only_ids=False):
     direct_groups = self.groups.all()
     groups = set()
     # which direction should we really use the graph?
-    for group in direct_groups:
-        ancestors = group.get_ancestors(include_self=True).all()
-        for ancestor in ancestors:
-            if only_ids:
-                groups.add(ancestor.id)
-            else:
-                groups.add(ancestor)
-    return groups
+    if ascending_strategy:
+        for group in direct_groups:
+            ancestors = group.get_ancestors(include_self=True).all()
+            for ancestor in ancestors:
+                if only_ids:
+                    groups.add(ancestor.id)
+                else:
+                    groups.add(ancestor)
+        return groups
     for group in direct_groups:
         descendants = group.get_descendants(include_self=True).all()
         for descendant in descendants:
