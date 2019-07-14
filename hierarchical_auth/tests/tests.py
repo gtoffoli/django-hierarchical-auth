@@ -13,7 +13,7 @@ class UserTestCase(TestCase):
 
     def test_get_all_groups(self):
         """
-        Test if get_all_groups() returns the user's group and all parent groups.
+        Test if get_all_groups() returns the user's groups.
         """
 
         # user_1 should be member of 3 groups.
@@ -82,25 +82,22 @@ def create_test_objects():
     )
 
     group_1 = Group.objects.create(
-        name        = 'group_1',
+        name='group_1',
     )
     group_2 = Group.objects.create(
-        name        = 'group_2',
-        parent      = group_1,
+        name='group_2',
     )
     group_3 = Group.objects.create(
         name        = 'group_3',
-        parent      = group_2,
     )
     group_4 = Group.objects.create(
         name        = 'group_4',
-        parent      = group_3,
     )
 
     user_1.groups.add(group_2)
     user_2.groups.add(group_4)
 
-    ct = ContentType.objects.create(name='type_1', app_label='app_1', model='model_1')
+    ct = ContentType.objects.create(app_label='app_1', model='model_1')
 
     group_1.permissions.add(
         Permission.objects.create(
