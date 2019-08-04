@@ -8,7 +8,7 @@ class HierarchicalModelBackend(ModelBackend):
     groups asigned to the user and all their descendants.
     """
 
-    def get_group_permissions(self, user_obj):
+    def get_group_permissions(self, user_obj, obj=None):
         """
         Returns a set of permission strings that this user has through his/her
         groups and their children.
