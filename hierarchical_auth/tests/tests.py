@@ -18,9 +18,9 @@ class UserTestCase(TestCase):
 
         # user_1 should be member of 3 groups.
         user_1 = User.objects.get(username='user_1')
-        group_names = map(lambda g: g.name, user_1.get_all_groups())
+        group_names = [g.name for g in user_1.get_all_groups()]
 
-        self.assertEquals(3, len(group_names))
+        self.assertEqual(3, len(group_names))
         self.assertFalse('group_1' in group_names)
         self.assertTrue('group_2' in group_names)
         self.assertTrue('group_3' in group_names)
@@ -31,9 +31,9 @@ class UserTestCase(TestCase):
 
         # user_2 should be member of 1 group.
         user_2 = User.objects.get(username='user_2')
-        group_names = map(lambda g: g.name, user_2.get_all_groups())
+        group_names = [g.name for g in user_2.get_all_groups()]
 
-        self.assertEquals(1, len(group_names))
+        self.assertEqual(1, len(group_names))
         self.assertFalse('group_1' in group_names)
         self.assertFalse('group_2' in group_names)
         self.assertFalse('group_3' in group_names)
