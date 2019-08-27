@@ -17,21 +17,26 @@ from mptt.forms import TreeNodeMultipleChoiceField
 
 if getattr(settings, 'MPTT_USE_FEINCMS', False):
     from mptt.admin import FeinCMSModelAdmin
+
     class GroupMPTTModelAdmin(GroupAdmin, FeinCMSModelAdmin):
         pass
 else:
     from mptt.admin import MPTTModelAdmin
+
     class GroupMPTTModelAdmin(GroupAdmin, MPTTModelAdmin):
         pass
 
 admin.site.unregister(Group)
 admin.site.register(Group, GroupMPTTModelAdmin)
 
+
 class UserWithMPTTChangeForm(UserChangeForm):
     groups = TreeNodeMultipleChoiceField(queryset=Group.objects.all())
 
+
 class UserWithMPTTAdmin(UserAdmin):
     form = UserWithMPTTChangeForm
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserWithMPTTAdmin)
