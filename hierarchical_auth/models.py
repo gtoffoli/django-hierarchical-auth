@@ -1,17 +1,11 @@
 from django.db import models
 from .settings import ASCENDING_STRATEGY
-
 from django.contrib.auth.models import Group
-
-try:
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-except:
-    from django.contrib.auth.models import User
-
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-
 from mptt.models import MPTTModelBase
+
+User = get_user_model()
 
 # enhance Group class by adding a parent field needed by mptt
 
