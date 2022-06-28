@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.conf import settings
-from django.db.models import get_model
+# from django.db.models import get_model # commented GT-220628
 
-from models import Group, User  # this takes care of custom users Etc.
+# from models import Group, User  # this takes care of custom users Etc.
+from django.contrib.auth.models import Group, User # GT-220628
 from django.contrib.auth.admin import GroupAdmin
 
 try:

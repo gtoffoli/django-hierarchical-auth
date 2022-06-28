@@ -18,6 +18,7 @@ models.ForeignKey(
     Group,
     null            = True,
     blank           = True,
+    on_delete       =  models.PROTECT, # added GT-220628
     related_name    = 'children',
     verbose_name    = _('parent'),
     help_text       = _('The group\'s parent group. None, if it is a root node.')
